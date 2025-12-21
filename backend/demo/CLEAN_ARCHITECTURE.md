@@ -34,7 +34,7 @@ backend/demo/src/main/java/com/example/demo/
 │   │   ├── Role.java
 │   │   └── Permission.java
 │   ├── port/                  # Ports (Interfaces - Dependency Inversion)
-│   │   ├── UserRepositoryPort.java
+│   │   ├── UserRepository.java
 │   │   ├── RoleRepositoryPort.java
 │   │   └── PermissionRepositoryPort.java
 │   ├── Enum/                  # Domain Enums
@@ -158,11 +158,11 @@ public class User {
 
 - **Interfaces** định nghĩa contracts cho external services
 - Domain định nghĩa "cần gì", Infrastructure implement "làm như thế nào"
-- **Ví dụ:** `UserRepositoryPort.java`
+- **Ví dụ:** `UserRepository.java`
 
 ```java
-// domain/port/UserRepositoryPort.java
-public interface UserRepositoryPort {
+// domain/port/UserRepository.java
+public interface UserRepository {
     User save(User user);
     Optional<User> findById(Long id);
     // ...
@@ -190,7 +190,7 @@ public interface UserRepositoryPort {
 ```java
 @Service
 public class CreateUserUseCase {
-    private final UserRepositoryPort userRepository;  // Port, không phải implementation
+    private final UserRepository userRepository;  // Port, không phải implementation
 
     public ResCreateUserDTO execute(CreateUserRequest request) {
         // Business logic here
@@ -243,7 +243,7 @@ public class UserDtoMapper {
 
 ```java
 @Component
-public class UserRepositoryAdapter implements UserRepositoryPort {
+public class UserRepositoryAdapter implements UserRepository {
     private final UserJpaRepository jpaRepository;  // JPA Repository
 
     @Override
@@ -348,7 +348,7 @@ public class UserController {
 3. Application Layer (CreateUserUseCase)
    - Validate business rules
    - UserDtoMapper.toDomain(request) → User (domain)
-   - Gọi UserRepositoryPort.save(user)
+   - Gọi UserRepository.save(user)
    ↓
 4. Infrastructure Layer (UserRepositoryAdapter)
    - UserEntityMapper.toEntity(user) → UserEntity (JPA)

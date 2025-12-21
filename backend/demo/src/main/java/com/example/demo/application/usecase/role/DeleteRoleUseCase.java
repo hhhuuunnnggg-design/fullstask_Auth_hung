@@ -1,14 +1,16 @@
 package com.example.demo.application.usecase.role;
 
-import com.example.demo.domain.port.RoleRepositoryPort;
-import com.example.demo.util.error.IdInvalidException;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import com.example.demo.domain.repository.RoleRepository;
+import com.example.demo.util.error.IdInvalidException;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class DeleteRoleUseCase {
-    private final RoleRepositoryPort roleRepository;
+    private final RoleRepository roleRepository;
 
     public void execute(Long id) throws IdInvalidException {
         if (!roleRepository.findById(id).isPresent()) {
@@ -17,4 +19,3 @@ public class DeleteRoleUseCase {
         roleRepository.deleteById(id);
     }
 }
-

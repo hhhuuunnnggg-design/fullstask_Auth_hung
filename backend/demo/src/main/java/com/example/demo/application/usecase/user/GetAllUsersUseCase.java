@@ -1,30 +1,32 @@
 package com.example.demo.application.usecase.user;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
+
 import com.example.demo.application.dto.response.ResUserDTO;
 import com.example.demo.application.dto.response.ResultPaginationDTO;
 import com.example.demo.application.mapper.UserDtoMapper;
 import com.example.demo.domain.entity.Role;
 import com.example.demo.domain.entity.User;
-import com.example.demo.domain.port.RoleRepositoryPort;
-import com.example.demo.domain.port.UserRepositoryPort;
-import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.stereotype.Service;
+import com.example.demo.domain.repository.RoleRepository;
+import com.example.demo.domain.repository.UserRepository;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class GetAllUsersUseCase {
-    private final UserRepositoryPort userRepository;
-    private final RoleRepositoryPort roleRepository;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
     public ResultPaginationDTO execute(Specification<?> spec, int page, int size) {
         // Note: This is a simplified version. In a real implementation,
         // you'd need to handle Specification conversion properly
         List<User> users = userRepository.findAllWithSpecification(spec, page - 1, size);
-        
+
         ResultPaginationDTO result = new ResultPaginationDTO();
         ResultPaginationDTO.Meta meta = new ResultPaginationDTO.Meta();
         meta.setPage(page);
@@ -48,4 +50,3 @@ public class GetAllUsersUseCase {
         return result;
     }
 }
-

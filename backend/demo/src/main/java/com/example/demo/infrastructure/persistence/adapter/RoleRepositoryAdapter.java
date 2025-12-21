@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.domain.entity.Role;
-import com.example.demo.domain.port.RoleRepositoryPort;
+import com.example.demo.domain.repository.RoleRepository;
 import com.example.demo.infrastructure.persistence.entity.PermissionEntity;
 import com.example.demo.infrastructure.persistence.entity.RoleEntity;
 import com.example.demo.infrastructure.persistence.mapper.RoleEntityMapper;
@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class RoleRepositoryAdapter implements RoleRepositoryPort {
+public class RoleRepositoryAdapter implements RoleRepository {
     private final RoleJpaRepository jpaRepository;
     private final PermissionJpaRepository permissionJpaRepository;
 

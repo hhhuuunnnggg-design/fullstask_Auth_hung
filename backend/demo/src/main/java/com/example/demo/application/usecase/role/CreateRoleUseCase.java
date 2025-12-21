@@ -9,8 +9,8 @@ import com.example.demo.application.dto.response.ResRoleDTO;
 import com.example.demo.application.mapper.RoleDtoMapper;
 import com.example.demo.domain.entity.Permission;
 import com.example.demo.domain.entity.Role;
-import com.example.demo.domain.port.PermissionRepositoryPort;
-import com.example.demo.domain.port.RoleRepositoryPort;
+import com.example.demo.domain.repository.PermissionRepository;
+import com.example.demo.domain.repository.RoleRepository;
 import com.example.demo.util.error.IdInvalidException;
 
 import lombok.RequiredArgsConstructor;
@@ -18,8 +18,8 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class CreateRoleUseCase {
-    private final RoleRepositoryPort roleRepository;
-    private final PermissionRepositoryPort permissionRepository;
+    private final RoleRepository roleRepository;
+    private final PermissionRepository permissionRepository;
 
     public ResRoleDTO execute(CreateRoleRequest request) throws IdInvalidException {
         if (roleRepository.existsByName(request.getName())) {

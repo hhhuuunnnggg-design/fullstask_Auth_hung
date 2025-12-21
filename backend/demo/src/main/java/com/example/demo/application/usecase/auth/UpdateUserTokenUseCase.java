@@ -1,18 +1,20 @@
 package com.example.demo.application.usecase.auth;
 
-import com.example.demo.application.usecase.user.GetUserByEmailUseCase;
-import com.example.demo.domain.entity.User;
-import com.example.demo.domain.port.UserRepositoryPort;
-import lombok.RequiredArgsConstructor;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import com.example.demo.application.usecase.user.GetUserByEmailUseCase;
+import com.example.demo.domain.entity.User;
+import com.example.demo.domain.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class UpdateUserTokenUseCase {
     private final GetUserByEmailUseCase getUserByEmailUseCase;
-    private final UserRepositoryPort userRepository;
+    private final UserRepository userRepository;
 
     public void execute(String token, String email) {
         Optional<User> userOpt = getUserByEmailUseCase.execute(email);
@@ -23,4 +25,3 @@ public class UpdateUserTokenUseCase {
         }
     }
 }
-

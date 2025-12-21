@@ -1,11 +1,5 @@
 package com.example.demo.application.usecase.user;
 
-import com.example.demo.domain.entity.User;
-import com.example.demo.domain.port.UserRepositoryPort;
-import com.example.demo.util.error.IdInvalidException;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,12 +7,21 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 
+import org.springframework.stereotype.Service;
+
+import com.example.demo.domain.entity.User;
+import com.example.demo.domain.repository.UserRepository;
+import com.example.demo.util.error.IdInvalidException;
+
+import lombok.RequiredArgsConstructor;
+
 @Service
 @RequiredArgsConstructor
 public class UpdateUserAvatarUseCase {
-    private final UserRepositoryPort userRepository;
+    private final UserRepository userRepository;
 
-    public String execute(Long userId, String originalFilename, java.io.InputStream inputStream) throws IOException, IdInvalidException {
+    public String execute(Long userId, String originalFilename, java.io.InputStream inputStream)
+            throws IOException, IdInvalidException {
         String cleanedFilename = originalFilename != null ? originalFilename.replaceAll("\\s+", "") : "unknown.jpg";
         String uniqueFileName = UUID.randomUUID().toString() + "_" + cleanedFilename;
 
@@ -40,4 +43,3 @@ public class UpdateUserAvatarUseCase {
         return avatarUrl;
     }
 }
-

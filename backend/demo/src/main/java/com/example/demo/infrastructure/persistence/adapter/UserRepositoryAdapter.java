@@ -11,7 +11,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.domain.entity.User;
-import com.example.demo.domain.port.UserRepositoryPort;
+import com.example.demo.domain.repository.UserRepository;
 import com.example.demo.infrastructure.persistence.entity.UserEntity;
 import com.example.demo.infrastructure.persistence.mapper.UserEntityMapper;
 import com.example.demo.infrastructure.persistence.repository.RoleJpaRepository;
@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class UserRepositoryAdapter implements UserRepositoryPort {
+public class UserRepositoryAdapter implements UserRepository {
     private final UserJpaRepository jpaRepository;
     private final RoleJpaRepository roleJpaRepository;
 

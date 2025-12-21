@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.domain.entity.Permission;
-import com.example.demo.domain.port.PermissionRepositoryPort;
+import com.example.demo.domain.repository.PermissionRepository;
 import com.example.demo.infrastructure.persistence.mapper.PermissionEntityMapper;
 import com.example.demo.infrastructure.persistence.repository.PermissionJpaRepository;
 
@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class PermissionRepositoryAdapter implements PermissionRepositoryPort {
+public class PermissionRepositoryAdapter implements PermissionRepository {
     private final PermissionJpaRepository jpaRepository;
 
     @Override

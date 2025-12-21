@@ -1,5 +1,11 @@
 package com.example.demo.application.usecase.auth;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
 import com.example.demo.application.dto.response.ResLoginDTO;
 import com.example.demo.application.dto.response.ResPermissionDTO;
 import com.example.demo.application.dto.response.ResRoleDTO;
@@ -7,22 +13,18 @@ import com.example.demo.application.usecase.user.GetUserByEmailUseCase;
 import com.example.demo.domain.entity.Permission;
 import com.example.demo.domain.entity.Role;
 import com.example.demo.domain.entity.User;
-import com.example.demo.domain.port.PermissionRepositoryPort;
-import com.example.demo.domain.port.RoleRepositoryPort;
+import com.example.demo.domain.repository.PermissionRepository;
+import com.example.demo.domain.repository.RoleRepository;
 import com.example.demo.util.error.IdInvalidException;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class LoginUseCase {
     private final GetUserByEmailUseCase getUserByEmailUseCase;
-    private final RoleRepositoryPort roleRepository;
-    private final PermissionRepositoryPort permissionRepository;
+    private final RoleRepository roleRepository;
+    private final PermissionRepository permissionRepository;
 
     public User getUserByEmail(String email) throws IdInvalidException {
         Optional<User> userOpt = getUserByEmailUseCase.execute(email);
@@ -74,8 +76,6 @@ public class LoginUseCase {
                 user.getAvatar(),
                 user.getCoverPhoto(),
                 user.getIs_blocked(),
-                roleDTO
-        );
+                roleDTO);
     }
 }
-

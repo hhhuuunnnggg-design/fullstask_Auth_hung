@@ -8,7 +8,7 @@ import com.example.demo.application.dto.request.UpdatePermissionRequest;
 import com.example.demo.application.dto.response.ResPermissionDTO;
 import com.example.demo.application.mapper.PermissionDtoMapper;
 import com.example.demo.domain.entity.Permission;
-import com.example.demo.domain.port.PermissionRepositoryPort;
+import com.example.demo.domain.repository.PermissionRepository;
 import com.example.demo.util.error.IdInvalidException;
 
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class UpdatePermissionUseCase {
-    private final PermissionRepositoryPort permissionRepository;
+    private final PermissionRepository permissionRepository;
 
     public ResPermissionDTO execute(Long id, UpdatePermissionRequest request) throws IdInvalidException {
         Permission permission = permissionRepository.findById(id)

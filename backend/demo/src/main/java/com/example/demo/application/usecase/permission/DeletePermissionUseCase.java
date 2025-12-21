@@ -1,14 +1,16 @@
 package com.example.demo.application.usecase.permission;
 
-import com.example.demo.domain.port.PermissionRepositoryPort;
-import com.example.demo.util.error.IdInvalidException;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import com.example.demo.domain.repository.PermissionRepository;
+import com.example.demo.util.error.IdInvalidException;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class DeletePermissionUseCase {
-    private final PermissionRepositoryPort permissionRepository;
+    private final PermissionRepository permissionRepository;
 
     public void execute(Long id) throws IdInvalidException {
         if (!permissionRepository.findById(id).isPresent()) {
@@ -17,4 +19,3 @@ public class DeletePermissionUseCase {
         permissionRepository.deleteById(id);
     }
 }
-

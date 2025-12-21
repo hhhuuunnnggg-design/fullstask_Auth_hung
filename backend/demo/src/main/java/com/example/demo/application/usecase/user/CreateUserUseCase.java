@@ -7,8 +7,8 @@ import com.example.demo.application.dto.request.CreateUserRequest;
 import com.example.demo.application.dto.response.ResCreateUserDTO;
 import com.example.demo.application.mapper.UserDtoMapper;
 import com.example.demo.domain.entity.User;
-import com.example.demo.domain.port.RoleRepositoryPort;
-import com.example.demo.domain.port.UserRepositoryPort;
+import com.example.demo.domain.repository.RoleRepository;
+import com.example.demo.domain.repository.UserRepository;
 import com.example.demo.util.error.IdInvalidException;
 
 import lombok.RequiredArgsConstructor;
@@ -16,8 +16,8 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class CreateUserUseCase {
-    private final UserRepositoryPort userRepository;
-    private final RoleRepositoryPort roleRepository;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
     public ResCreateUserDTO execute(CreateUserRequest request) throws IdInvalidException {

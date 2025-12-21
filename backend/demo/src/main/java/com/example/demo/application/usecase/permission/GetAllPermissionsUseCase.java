@@ -1,26 +1,28 @@
 package com.example.demo.application.usecase.permission;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
+
 import com.example.demo.application.dto.response.ResPermissionDTO;
 import com.example.demo.application.dto.response.ResultPaginationDTO;
 import com.example.demo.application.mapper.PermissionDtoMapper;
 import com.example.demo.domain.entity.Permission;
-import com.example.demo.domain.port.PermissionRepositoryPort;
-import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.stereotype.Service;
+import com.example.demo.domain.repository.PermissionRepository;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class GetAllPermissionsUseCase {
-    private final PermissionRepositoryPort permissionRepository;
+    private final PermissionRepository permissionRepository;
 
     public ResultPaginationDTO execute(Specification<?> spec, int page, int size) {
         // Note: Simplified version - need proper Specification handling
         List<Permission> permissions = permissionRepository.findAll();
-        
+
         ResultPaginationDTO result = new ResultPaginationDTO();
         ResultPaginationDTO.Meta meta = new ResultPaginationDTO.Meta();
         meta.setPage(page);
@@ -37,4 +39,3 @@ public class GetAllPermissionsUseCase {
         return result;
     }
 }
-

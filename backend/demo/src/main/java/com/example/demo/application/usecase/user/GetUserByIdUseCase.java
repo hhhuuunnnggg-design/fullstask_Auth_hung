@@ -1,20 +1,22 @@
 package com.example.demo.application.usecase.user;
 
+import org.springframework.stereotype.Service;
+
 import com.example.demo.application.dto.response.ResUserDTO;
 import com.example.demo.application.mapper.UserDtoMapper;
 import com.example.demo.domain.entity.Role;
 import com.example.demo.domain.entity.User;
-import com.example.demo.domain.port.RoleRepositoryPort;
-import com.example.demo.domain.port.UserRepositoryPort;
+import com.example.demo.domain.repository.RoleRepository;
+import com.example.demo.domain.repository.UserRepository;
 import com.example.demo.util.error.IdInvalidException;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class GetUserByIdUseCase {
-    private final UserRepositoryPort userRepository;
-    private final RoleRepositoryPort roleRepository;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
     public ResUserDTO execute(Long id) throws IdInvalidException {
         User user = userRepository.findById(id)
@@ -28,4 +30,3 @@ public class GetUserByIdUseCase {
         return UserDtoMapper.toResUserDTO(user, role);
     }
 }
-

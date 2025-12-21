@@ -1,17 +1,19 @@
 package com.example.demo.application.usecase.auth;
 
-import com.example.demo.domain.entity.User;
-import com.example.demo.domain.port.UserRepositoryPort;
-import com.example.demo.util.error.IdInvalidException;
-import lombok.RequiredArgsConstructor;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import com.example.demo.domain.entity.User;
+import com.example.demo.domain.repository.UserRepository;
+import com.example.demo.util.error.IdInvalidException;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class GetUserByRefreshTokenUseCase {
-    private final UserRepositoryPort userRepository;
+    private final UserRepository userRepository;
 
     public User execute(String token, String email) throws IdInvalidException {
         Optional<User> userOpt = userRepository.findByRefreshTokenAndEmail(token, email);
@@ -21,4 +23,3 @@ public class GetUserByRefreshTokenUseCase {
         return userOpt.get();
     }
 }
-

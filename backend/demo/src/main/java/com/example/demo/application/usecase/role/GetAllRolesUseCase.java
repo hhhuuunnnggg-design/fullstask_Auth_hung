@@ -11,16 +11,16 @@ import com.example.demo.application.dto.response.ResultPaginationDTO;
 import com.example.demo.application.mapper.RoleDtoMapper;
 import com.example.demo.domain.entity.Permission;
 import com.example.demo.domain.entity.Role;
-import com.example.demo.domain.port.PermissionRepositoryPort;
-import com.example.demo.domain.port.RoleRepositoryPort;
+import com.example.demo.domain.repository.PermissionRepository;
+import com.example.demo.domain.repository.RoleRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class GetAllRolesUseCase {
-    private final RoleRepositoryPort roleRepository;
-    private final PermissionRepositoryPort permissionRepository;
+    private final RoleRepository roleRepository;
+    private final PermissionRepository permissionRepository;
 
     public ResultPaginationDTO execute(Specification<?> spec, int page, int size) {
         // Note: Simplified version - need proper Specification handling

@@ -1,11 +1,11 @@
-package com.example.demo.domain.port;
+package com.example.demo.domain.repository;
 
 import java.util.List;
 import java.util.Optional;
 
 import com.example.demo.domain.entity.Permission;
 
-public interface PermissionRepositoryPort {
+public interface PermissionRepository {
     Permission save(Permission permission);
 
     Optional<Permission> findById(Long id);

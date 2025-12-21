@@ -1,15 +1,17 @@
 package com.example.demo.application.usecase.user;
 
-import com.example.demo.domain.entity.User;
-import com.example.demo.domain.port.UserRepositoryPort;
-import com.example.demo.util.error.IdInvalidException;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import com.example.demo.domain.entity.User;
+import com.example.demo.domain.repository.UserRepository;
+import com.example.demo.util.error.IdInvalidException;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class ChangeActivityUserUseCase {
-    private final UserRepositoryPort userRepository;
+    private final UserRepository userRepository;
 
     public User execute(Long id) throws IdInvalidException {
         User user = userRepository.findById(id)
@@ -19,4 +21,3 @@ public class ChangeActivityUserUseCase {
         return userRepository.save(user);
     }
 }
-
