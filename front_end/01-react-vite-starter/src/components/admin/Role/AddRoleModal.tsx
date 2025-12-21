@@ -53,7 +53,7 @@ const AddRoleModal = ({ open, onCancel, onSuccess }: AddRoleModalProps) => {
         name: values.name,
         description: values.description,
         active: values.active,
-        permissions: values.permissions?.map((id: number) => ({ id })) || [],
+        permissionIds: values.permissions || [],
       };
       await createRoleAPI(roleData);
       message.success("Tạo vai trò thành công!");
